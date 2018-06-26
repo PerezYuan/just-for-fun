@@ -1,4 +1,5 @@
 var express = require('express');
+var connection = require('../mysql');
 var router = express.Router();
 
 /* GET home page. */

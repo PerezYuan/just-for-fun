@@ -10,6 +10,7 @@ var FileStore = require('session-file-store')(session);
 
 var index = require('./routes/index');
 var login = require('./routes/login');
+var shop = require('./routes/shop');
 
 var app = express();
 
@@ -36,10 +37,11 @@ app.use(session({
 
 app.use('/', index);
 app.use('/', login);
+app.use('/', shop);
 
 app.get(/^(?!.*api)/, function (req, res) {
-  console.log(req.header.cookies)
-  console.log(req.session.loginUser)
+  // console.log(req.header.cookies)
+  // console.log(req.session.loginUser)
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
