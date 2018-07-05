@@ -11,6 +11,8 @@ var FileStore = require('session-file-store')(session);
 var index = require('./routes/index');
 var login = require('./routes/login');
 var shop = require('./routes/shop');
+var company = require('./routes/company');
+var bannerUrl = require('./routes/bannerUrl');
 
 var app = express();
 
@@ -38,6 +40,8 @@ app.use(session({
 app.use('/', index);
 app.use('/', login);
 app.use('/', shop);
+app.use('/', company)
+app.use('/', bannerUrl)
 
 app.get(/^(?!.*api)/, function (req, res) {
   // console.log(req.header.cookies)
