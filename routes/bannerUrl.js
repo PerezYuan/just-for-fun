@@ -1,25 +1,16 @@
 var express = require('express');
-var connection = require('../mysql');
+var query = require('../mysql');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/api/banner/get', function(req, res, next) {
-  res.writeHead(200, { "Content-Type": "application/json;charset=utf-8" });
-  connection.query(`SELECT * FROM banner_img`, function (error, results) {
-    if (error) {
-      res.end(JSON.stringify({
-        code: 500,
-        msg: "系统错误"
-      }));
-    } else {
-      results.forEach(element => {
-        delete element.id
-      });
-      res.end(JSON.stringify({
-        code: 200,
-        data: results
-      }));
-    }
+router.get('/api/banner/get', async function(req, res, next) {
+  const rows = await query(`SELECT * FROM banner_img`)
+  rows.forEach(element => {
+    delete element.id
+  });
+  res.json({
+    code: 200,
+    data: rows
   });
 });
 

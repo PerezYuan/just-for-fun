@@ -1,41 +1,25 @@
 var express = require('express');
-var connection = require('../mysql');
+var query = require('../mysql');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/api/shop/get/:id', function(req, res, next) {
-  res.writeHead(200, { "Content-Type": "application/json;charset=utf-8" });
-  connection.query(`SELECT * FROM shop_list where id=${req.params.id}`, function (error, results) {
-    if (error) {
-      res.end(JSON.stringify({
-        code: 500,
-        msg: "系统错误"
-      }));
-    } else {
-      if (results.length === 0) {
-        res.end(JSON.stringify({
-          code: 200,
-          data: {}
-        }));
-      } else {
-        let serviceArr = results[0].service.split(',').map(item => `id=${item}`);
-        // 获取service列表
-        connection.query(`SELECT * FROM service_type where ${serviceArr.join(' OR ')}`, function (err, serviceResult) {
-          if (err) {
-            res.end({
-              code: 500,
-              msg: "系统错误"
-            });
-          };
-          results[0].service = serviceResult
-          res.end(JSON.stringify({
-            code: 200,
-            data: results[0]
-          }));
-        })
-      }
-    }
-  });
+router.get('/api/shop/get/:id', async function(req, res, next) {
+  console.log(1)
+  const rows = await query(`SELECT * FROM shop_list where id=${req.params.id}`)
+  if (rows.length === 0) {
+    res.json({
+      code: 200,
+      data: {}
+    })
+    return
+  }
+  let serviceArr = rows[0].service.split(',').map(item => `id=${item}`);
+  const serviceRows = await query(`SELECT * FROM service_type where ${serviceArr.join(' OR ')}`)
+  rows[0].service = serviceRows
+  res.json({
+    code: 200,
+    data: rows[0]
+  })
 });
 
 module.exports = router;

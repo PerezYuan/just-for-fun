@@ -43,11 +43,11 @@ app.use('/', shop);
 app.use('/', company)
 app.use('/', bannerUrl)
 
-app.get(/^(?!.*api)/, function (req, res) {
-  // console.log(req.header.cookies)
-  // console.log(req.session.loginUser)
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.get(/^(?!.*api)/, function (req, res) {
+//   // console.log(req.header.cookies)
+//   // console.log(req.session.loginUser)
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
