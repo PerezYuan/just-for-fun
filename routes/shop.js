@@ -4,7 +4,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/api/shop/get/:id', async function(req, res, next) {
-  console.log(1)
   const rows = await query(`SELECT * FROM shop_list where id=${req.params.id}`)
   if (rows.length === 0) {
     res.json({
@@ -19,6 +18,24 @@ router.get('/api/shop/get/:id', async function(req, res, next) {
   res.json({
     code: 200,
     data: rows[0]
+  })
+});
+
+router.get('/api/shop/list', async function(req, res, next) {
+  console.log(1)
+  const rows = await query(`SELECT id, name FROM shop_list`)
+  res.json({
+    code: 200,
+    data: rows
+  })
+});
+
+router.get('/api/shop/delete', async function(req, res, next) {
+  console.log(req.params)
+  // const rows = await query(`SELECT id, name FROM shop_list`)
+  res.json({
+    code: 200,
+    data: []
   })
 });
 
