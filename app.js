@@ -13,6 +13,7 @@ var login = require('./routes/login');
 var shop = require('./routes/shop');
 var company = require('./routes/company');
 var bannerUrl = require('./routes/bannerUrl');
+var employee = require('./routes/employee');
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use(session({
 app.use('/', index);
 app.use('/', login);
 app.use('/', shop);
+app.use('/', employee);
 app.use('/', company)
 app.use('/', bannerUrl)
 
