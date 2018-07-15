@@ -3,15 +3,20 @@ var query = require('../mysql');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/api/banner/get', async function(req, res, next) {
-  const rows = await query(`SELECT * FROM banner_img`)
-  rows.forEach(element => {
-    delete element.id
-  });
-  res.json({
-    code: 200,
-    data: rows
-  });
+router.get('/api/banner/list', async function(req, res, next) {
+  try {
+    const rows = await query(`SELECT * FROM banner_img`)
+    res.json({
+      code: 200,
+      list: rows
+    });
+  }  catch (e) {
+    res.json({
+      code: e.code,
+      msg: e.sqlMessage
+    })
+  }
+  
 });
 
 module.exports = router;

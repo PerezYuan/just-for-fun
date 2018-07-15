@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 
 var session = require('express-session')
 var FileStore = require('session-file-store')(session);
@@ -14,8 +15,12 @@ var shop = require('./routes/shop');
 var company = require('./routes/company');
 var bannerUrl = require('./routes/bannerUrl');
 var employee = require('./routes/employee');
+var upload = require('./routes/upload');
+var service = require('./routes/service');
 
 var app = express();
+
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +49,8 @@ app.use('/', shop);
 app.use('/', employee);
 app.use('/', company)
 app.use('/', bannerUrl)
+app.use('/', service)
+app.use('/', upload)
 
 // app.get(/^(?!.*api)/, function (req, res) {
 //   // console.log(req.header.cookies)

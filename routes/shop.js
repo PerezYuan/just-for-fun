@@ -22,12 +22,16 @@ router.get('/api/shop/get/:id', async function(req, res, next) {
 });
 
 router.get('/api/shop/list', async function(req, res, next) {
-  console.log(1)
   const rows = await query(`SELECT id, name FROM shop_list`)
   res.json({
     code: 200,
-    data: rows
+    list: rows
   })
+});
+
+router.post('/api/shop/update', async function(req, res, next) {
+  console.log(req.body)
+  res.json(req.body)
 });
 
 router.get('/api/shop/delete', async function(req, res, next) {
