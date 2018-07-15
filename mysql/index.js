@@ -1,10 +1,10 @@
 var mysql      = require('mysql');
 var pool = mysql.createPool({
-  host     : 'cd-cdb-2n4ah3sb.sql.tencentcdb.com',
-  port     : '63884',
-  user     : 'root',
-  password : 'yzmloveshy1993',
-  database : 'weijian'
+  host     : '',
+  port     : '',
+  user     : '',
+  password : '',
+  database : ''
 });
  
 let query = function( sql, values ) {
