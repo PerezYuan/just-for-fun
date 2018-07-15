@@ -19,4 +19,29 @@ router.get('/api/banner/list', async function(req, res, next) {
   
 });
 
+
+router.post('/api/banner/modify', async function(req, res, next) {
+  let { id, url, link } = req.body
+  link = link.replace(/\'/g, "\\'")
+  if (id && url) {
+    try {
+      const rows = await query(`UPDATE \`banner_img\` SET url='${url}', set_url='${link}' WHERE banner_img.id = ${id}`)
+      res.json({    
+        code: 200,
+        msg: 'Success'
+      })
+    } catch (e) {
+      res.json({    
+        code: e.code,
+        msg: e.sqlMessage
+      })
+    }
+  } else {
+    res.json({    
+      code: 404,
+      msg: 'No params'
+    })
+  }
+});
+
 module.exports = router;
