@@ -17,6 +17,7 @@ var bannerUrl = require('./routes/bannerUrl');
 var employee = require('./routes/employee');
 var upload = require('./routes/upload');
 var service = require('./routes/service');
+var title = require('./routes/title');
 
 var app = express();
 
@@ -51,6 +52,7 @@ app.use('/', company)
 app.use('/', bannerUrl)
 app.use('/', service)
 app.use('/', upload)
+app.use('/', title)
 
 // app.get(/^(?!.*api)/, function (req, res) {
 //   // console.log(req.header.cookies)
