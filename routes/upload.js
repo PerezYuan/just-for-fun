@@ -15,8 +15,8 @@ router.post('/api/upload', multipartMiddleware, function(req, res, next) {
   // 创建实例
   var cos = new COS({
     AppId: '1256534403',
-    SecretId: 'AKIDeBYmqeam6HG8rXgMeszzrbAYu67xKGi0',
-    SecretKey: 'JTVPCpLfqqfJm4HJBwa5Shonbjox31rZ',
+    SecretId: '',
+    SecretKey: '',
   });
   // 分片上传
   cos.sliceUploadFile({
